@@ -3,11 +3,61 @@ layout: default
 title: {{ site.name }}
 ---
 
-<div id="home">
-  <h1>Blog Posts</h1>
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
-</div>
+<h1>
+  <a id="user-content-header-1" class="anchor" href="#header-1" aria-hidden="true">
+    <span class="octicon octicon-link"></span>
+  </a>Introduction
+</h1>
+
+<p style="text-align: justify;">
+  The idea of our project is to represent the dataset of the movies from the CMU Movie Summary Corpus 
+  as a graph by connecting the movies looking at the similarities between them. We are operating with a dateset 
+  of 41783 movies. Based on this graph, 
+  we want to identify clusters and study the most interesting topics.
+</p>
+
+<h1>
+  Method
+</h1>
+
+
+
+{% for post in site.posts %}
+  <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+{% endfor %}
+
+
+<h1>
+ Visualization
+</h1>
+
+<p>
+  <img src="gephi.jpg" alt="Gephi image" style="width:50%;">
+</p>
+<h1>
+  Graph analysis
+</h1>
+
+<iframe src="topics_viz.html" height="500" width="600" frameBorder="0"></iframe>
+
+<h2>
+  Size
+</h2>
+
+<h2>
+  Clustering
+</h2>
+
+<h2>
+  Results
+</h2>
+
+<h1>
+  Discussion
+</h1>
+
+<h1>
+  Conclusion
+</h1>
+
+<a href="https://github.com/epfl-ada/ada-2022-project-talecayu">Github</a>
