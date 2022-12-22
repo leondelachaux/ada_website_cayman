@@ -1,7 +1,7 @@
 # Setup
 title:        Movies as a graph
 tagline:      Project ADA 2022
-baseurl:      ""
+baseurl:      "https://leondelachaux.github.io/jekyll-cayman-theme"
 paginate:     1
 locale:       "en"
 # https://leondelachaux.github.io/jekyll-cayman-theme
