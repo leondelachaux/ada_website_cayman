@@ -1,14 +1,14 @@
 # Setup
-title:        Project or Site name
-tagline:      A responsive theme for your project on GitHub Pages
-baseurl:      "https://leondelachaux.github.io/jekyll-cayman-theme"
+title:        Movies as a graph
+tagline:      Project ADA 2022
+baseurl:      ""
 paginate:     1
 locale:       "en"
-
+# https://leondelachaux.github.io/jekyll-cayman-theme
 # About/contact
 author:
-  name:       Author name
-  url:        http://yourhomepage.com 
+  name: Camille Guillaume, Taras Pavliv, Yucef Grebici, Léon Delachaux
+  url:            
 
 # Gems
 gems:

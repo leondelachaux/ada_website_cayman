@@ -1,0 +1,8 @@
+---
+layout: default
+title:  "Theory!"
+date:   2016-02-12 17:50:00
+categories: main
+---
+
+For this milestone we didn't built a dataset of pairs of movies with different genres, because we're confident it won't be a problem to find them. Building a dataset also won't be a problem: you sample a movie randomly, and then sample another one to form a pair. If the second one has an intersection in the genres, you resample it, until you find one with 0 intersection. We won't create all possible pairs because the dataset will be too large.
