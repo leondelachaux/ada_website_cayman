@@ -3,38 +3,30 @@ layout: default
 title: {{ site.name }}
 ---
 
+<h1>Motivation</h1>
 <p style="text-align: justify;">
 Have you ever watched two movies and thought to yourself, "These movies are so different, but they seem to 
 be covering the same themes and ideas"? Or perhaps you've noticed that two movies from different countries 
 and decades seem to be dealing with similar social issues, sentiments or they could display similar 
-characters. What really makes two movies similar? Do production choices such as the cast or the director play 
-a role in the similarity of two films? And to what extent are two sequels similar to one another? 
+characters. What are the typical topics that comes out? Do movies from similar eras or countries also have 
+similarities about their content?
 <br>
 <br>
 These are just a few questions that we will be exploring in this project, as we dive into the hidden 
-similarities between films from all times and horizons. In order to answer this problem, we will analyze the 
-dataset of the movies from the CMU Movie Summary Corpus. We will study several similarity features in this 
-dataset of 41783 movies. One feature we will investigate in detail is the topics covered in movie plots. 
+similarities between films from all times and horizons. In order to answer this problem, we will analyze 
+the dataset of the movies from the CMU Movie Summary Corpus. We will study several similarity features in 
+this dataset of 41783 movies. One feature we will investigate in detail is the topics covered in movie plots. 
 Using this similarity metric, we will construct a graph connecting the movies. With this graph, we aim to 
-identify clusters of movies and evaluate the relationships and influence between them
+identify clusters of movies and evaluate the relationships and influence between them.
 <br>
 <br>
-When we think about similarity between two movies the first thing that occurs to your mind is the content 
-of the film, in other words what topics or what fictional world the plot depicts. By looking beyond 
-surface-level differences and delving into the deeper meanings and messages of these films, we can gain 
+When we think about similarity between two movies the first thing that comes to our mind is the content of 
+the film, in other words, what topics or what fictional world the plot depicts. By looking beyond 
+surface-level differences and diving into the deeper meanings and messages of these films, we can gain 
 a greater appreciation for the universal themes and experiences that they depict.
 </p>
 
-<p style="text-align: center;">
-  <img src="gephi_tuned.png" width="500" height="500">
-</p>
-
-<p style="text-align: justify;">
-In our initial investigation, we used word clouds to present the findings of the BERTOPIC model's analysis 
-of the topic distribution of a collection of film plot summaries organized by decade. The results 
-indicated that films encompass a wide range of topics, while also being impacted by the events and 
-cultural context of their time period.
-</p>
+<h1>Topics analysis</h1>
 
 <img class="mySlides" src="wordclouds/1900s.png"> 
 <img class="mySlides" src="wordclouds/1910s.png">   
@@ -54,9 +46,16 @@ cultural context of their time period.
     <span style='font-size:30px;'>&#10094;</span>
   </button>
   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-  <button onclick="plusDivs(-1, 'mySlides')">
-    <span style='font-size:30px;'>&#10094;</span>
+  <button onclick="plusDivs(1, 'mySlides')">
+    <span style='font-size:30px;'>&#10095;</span>
   </button>
+</p>
+
+<p style="text-align: justify;">
+In our initial investigation, we used word clouds to present the findings of the BERTOPIC model's analysis 
+of the topic distribution of a collection of film plot summaries organized by decade. The results 
+indicated that films encompass a wide range of topics, while also being impacted by the events and 
+cultural context of their time period.
 </p>
 
 <p style="text-align: justify;">
@@ -114,14 +113,24 @@ a detailed and accurate analysis of science fiction films, enabling a deeper und
 narrative context and more meaningful comparison.
 </p>
 
+<p>
+  Now that we investigated the topics covered in the plots, we can ask ourselves what role plays « sharing 
+  the same topics » in the similarity between movies? Also do other features besides topics exist that 
+  could allow us to quantify the similarity between movies? In this section we investigate several features 
+  that we divide into 4 main categories. All these categories together allow us to define the similarity 
+  between movies.
+</p>
+
+<h1>Evaluating the similarity between movies</h1>
 <p style="text-align:center">
   <iframe src="weights_fig.html" height="500" width="600" frameBorder="0"></iframe>
 </p>
 
-<p style="text-align: justify;">
+<p style="text-align: justify">
 We have defined the following weights associated to each similarity category in order to calculate the total 
 similarity between films:
-<ul>
+</p>
+<ul style="text-align: justify">
   <li> 'time' &#128338; 0.1 -This weight represents the importance of the time factor in determining the 
     similarity between films. For example, a film produced in the 50s has more chances to share similarities 
     with closely time-related films than films from the 2000s. Among the other weights, this factor has the 
@@ -140,56 +149,160 @@ similarity between films:
     in determining the similarity between films. Films from the same country tend to be more similar, especially 
     if the film's content reflects the country's cultural or societal circumstances or current trends.</li>
 </ul> 
+<p style="text-align: justify">
 We chose these weights based on the importance we want to give to each factor in determining the similarity 
 between films. In particular, we iterated over a list of sequels in order to maximize the score for these 
 films. The higher the weight, the more important the factor is in determining the similarity. For more 
 information on sequels, see Chapter [X].
 </p>
 
-<p>
+<p style="text-align: justify">
 Now that we have established the weight associated with each similarity feature, we need to compute the 
 similarity between 0 and 1 for each feature. The methods used are detailed here above. For more details 
-about these calculations we invite you to check our code available in open source on GitHub: 
-https://github.com/epfl-ada/ada-2022-project-talecayu
-<br>
-<br>
-We finally get the total similarity between 0 and 1 between every pair of movies 
+about these calculations we invite you to check our code available in open source on 
+<a href="https://github.com/epfl-ada/ada-2022-project-talecayu">Github</a>.
 </p>
 
-
-<p>
-Here we are, we have obtained our similarity relation between every movie of our dataset. 
-Now let’s construct our movie graph!
+<p style="text-align: justify">
+We finally get the total similarity between 0 and 1 between every pair of movies and we have obtained our 
+similarity relation between every movie of our dataset. Now let’s construct our movie graph!
 </p>
 
+<h2>
+  Similarity sanity check using sequels
+</h2>
+
 <p>
+  To check that the similarity function returns a high value for movies that are close to each other, we 
+  performed tests using a set of sequels and we found good results that would connect the movies from the same
+  sequel.
+</p>
+
+<h1>The Movie graph</h1>
+
+<p style="text-align: center;">
+  <img src="gephi_tuned.png" width="500" height="500">
+</p>
+
+<p style="text-align: justify">
 Here is our movie graph constructed with movies as nodes and with similarities as weight on the edges. 
-We created a tool able to assess the relations between movies!
+We created a tool able to assess the relations between movies! With this precious tool between our hands, 
+it’s time to investigate the complex similarity between movies taking into accounts underlying movies 
+characteristics. Let’s evaluate their relationship by finding movie communities in which these relations 
+are stronger.
 </p>
+
+<h1>Movie communities</h1>
 
 <p style="text-align:center">
   <iframe src="communities/communities_count_barplot.html" height="420" width="600" frameBorder="0"></iframe>
   <iframe src="communities/communities_count_pie.html" height="400" width="600" frameBorder="0"></iframe>
 </p>
+<p style="text-align: justify">
+We find the communities associated with the movie graph by using the Louvain algorithm. We get 15 communities 
+labeled from community 0 until community 14. We notice that we can focus our analysis on the first nine 
+communities as they include most of the movies of the dataset. These 9 communities correspond to the color 
+code used in the graph. Let’s analyze the movies present in each community to get a sense of what they 
+represent, and what links the movies belonging to them.
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
 
+<iframe class="mySlides3" src="communities/cluster0_plotly.html" height="1000" width="1200" frameBorder="0"></iframe>
+<iframe class="mySlides3" src="communities/cluster1_plotly.html" height="1000" width="1200" frameBorder="0"></iframe>
+<iframe class="mySlides3" src="communities/cluster2_plotly.html" height="1000" width="1200" frameBorder="0"></iframe>
+<iframe class="mySlides3" src="communities/cluster3_plotly.html" height="1000" width="1200" frameBorder="0"></iframe>
+<iframe class="mySlides3" src="communities/cluster4_plotly.html" height="1000" width="1200" frameBorder="0"></iframe>
+<iframe class="mySlides3" src="communities/cluster5_plotly.html" height="1000" width="1200" frameBorder="0"></iframe>
+<iframe class="mySlides3" src="communities/cluster6_plotly.html" height="1000" width="1200" frameBorder="0"></iframe>
+<iframe class="mySlides3" src="communities/cluster7_plotly.html" height="1000" width="1200" frameBorder="0"></iframe>
+<iframe class="mySlides3" src="communities/cluster8_plotly.html" height="1000" width="1200" frameBorder="0"></iframe>
+<p style="text-align:center">
+  <button onclick="plusDivs(-1, 'mySlides3')">
+    <span style='font-size:30px;'>&#10094;</span>
+  </button>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+  <button onclick="plusDivs(1, 'mySlides3')">
+    <span style='font-size:30px;'>&#10095;</span>
+  </button>
+</p>
 
+<p style="text-align: justify">
+  Community 0: This community is the largest community in our movie graph which includes 15’300 movies corresponding to 40% of the movies. Because of the size of this community, we expect it to be quite general so that it can correspond to many movies. Let’s check this hypothesis by looking at its characteristics. First, we see that this group is made of mostly American movies which correlates with the fact that this is the most represented country in our dataset. We see that the main genres are respectively in descending importance: Drama, Comedy, Thriller and Romance. These genres are very common movie genres. The topics evolve around the American way of living with topics such as cow-boy related: “Horse, Town, Ranch” or family related: “Wedding, Husband, Wife”. The names of the characters are also common American names: Sam, Jack, Frank, Charlie, … The directors and actors belong to Hollywood, especially old Hollywood movies are present because of casts involving John Wayne, Bette Davis or James Stewart and directed by Alfred Hitchcock, Michael Curtiz. We can see this also by looking at the release year which follows the dataset release year distribution except between the 1930s and the 1950s where it is higher than the dataset distribution. In general, we can define this community by the Hollywood golden age.
+<br>
+<br>
+Community 1: This community is the fourth community in size with 2400 movies. By looking at the movie we notice straight away that these movies are grouped because of their content which revolves around Horror, Thriller and Science fiction which are genres more specific than community 0’s genres for example. This is confirmed by checking the topics covered which are related to Fantastic: “Demon, Ghost” to Horror: “Vampires, Dracula” and to dystopic Science fiction: “Aliens, zombies, Nuclear bomb” or to more futurist science fiction “Comet, Earth, Space”. These movies involving special effects suggest that they correspond to Hollywood or European high budget industry. They set up characters like: Dracula, Batman, or Thor. This is confirmed when checking the countries or the actors: Christopher Lee that played in Lord of the Rings, Peter Cushing known for Sherlock Holmes or Frankenstein. The special effect involved in these movies correlate with the fact these movies are quite recent (80s, 90s, 00s). We could resume this community as Horror and science fiction blockbusters. 
+<br>
+<br>
+Community 2: This community is the third community in size with 4600 movies. This community is contrasted with the previous ones with respect to the country of origin. Here USA is not the main country, as it is in the overall dataset. This community seems more international especially European: France, Italy, Germany, UK, Spain. This is confirmed by the genre “worldwide” ranked second after Drama. The actors such as Gerard Depardieu, Geraldine Chaplin, and directors such as Ingmar Bergman (Swedish), Claude Chabrol (French) show a European production. The topics seems to be classified by countries, which matches the fact that most of the movies are English speaking movies, so non-English can stand out as outliers easily. We could resume this community European cinema. 
+<br>
+<br>
+Community 3: This community is the fourth community in size with 2600 movies. This community is the first one to have a majority of Black and white movies. This indicates that this cluster is separated from the other based on the time context. The decade distribution is not heavy tail towards 2000s and has most films released date before the 1960s. Some uncommon movie genres such as Black-and-White and War film appear. The time context of pre-1960s suggests that the themes covered in the movie could put forward the society context of WW1 and WW2. This is confirmed by the topics that include “German, Sergeant, Aircrfat, Hitler”. This community is not only grouped by the time context but also by the topic of historical drama and fight such as “Musketeers, Pirates” or “Horse, Ranch” related to cow-boys. We could name this group as Action and Adventure past stories
+<br>
+<br>
+Community 4: 
+
+</p>
+
+<h1>Conclusion</h1>
+
+<p style="text-align: justify">
+Through our analysis of the movie dataset from the CMU Movie Summary Corpus, we were able to uncover 
+the hidden similarities between films from all times and horizons. In fact, by using the BERTOPIC model 
+to examine the topic distribution of film plot summaries, we were able to gain valuable insight into the 
+themes and cultural influences of films.
+<br>
+<br>
+Considering multiple similarity features, such as plot, characters, and production choices, is essential 
+in order to get a more comprehensive understanding of the similarities between films. By constructing a 
+graph based on these similarity features, we were able to identify clusters of movies and evaluate the 
+relationships and influence between them.
+<br>
+<br>
+In addition, we conducted an analysis of sequels in order to confirm the effectiveness of our method, 
+fine tune our weighted similarity function and identify situations where our similarity measurement might 
+be distorted. For example, we found that repeating character names across films could potentially mislead 
+our analysis of similarity.
+<br>
+<br>
+The BERTOPIC model and other tools used in this study have great potential for further exploration. 
+For example, they could be used to conduct studies of similarity in a temporal context, in order to track 
+the course of influences between different geographic regions and cultures.
+<br>
+<br>
+These findings could have significant implications for filmmakers, film critics, and film enthusiasts. 
+Filmmakers can draw inspiration from past films while still adding their own unique elements, and film 
+critics and enthusiasts can appreciate the universal themes and experiences depicted in films from different 
+times and places. Overall, this study underscores the importance of looking beyond surface-level differences 
+and exploring the deeper meanings and messages of films in order to gain a greater appreciation for their 
+universal themes and experiences.
+</p>
+
+<!--
 {% for post in site.posts %}
   <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
 {% endfor %}
 
-<a href="https://github.com/epfl-ada/ada-2022-project-talecayu">Github</a>
+<a href="https://github.com/epfl-ada/ada-2022-project-talecayu">Github</a>-->
 
 <script>
 var slideIndex1 = 1;
 showDivs(slideIndex1);
 var slideIndex2 = 1;
 showDivs(slideIndex2, "mySlides2");
+var slideIndex3 = 1;
+showDivs(slideIndex3, "mySlides3");
 
 function plusDivs(n, imgClass="mySlides") {
   if (imgClass=="mySlides") {
     showDivs(slideIndex1 += n, imgClass);
   } else if (imgClass=="mySlides2") {
     showDivs(slideIndex2 += n, imgClass);
+  } else if (imgClass=="mySlides3") {
+    showDivs(slideIndex3 += n, imgClass);
   }
 }
 
@@ -213,6 +326,15 @@ function showDivs(n, imgClass="mySlides") {
     }
     x[slideIndex2-1].style.display = "block"; 
     x[slideIndex2-1].style.margin = "0 auto";
+  }
+  else if (imgClass=="mySlides3") {
+    if (n > x.length) {slideIndex3 = 1}
+    if (n < 1) {slideIndex3 = x.length}
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    x[slideIndex3-1].style.display = "block"; 
+    x[slideIndex3-1].style.margin = "-15%";
   }
 }
 </script>
