@@ -3,143 +3,41 @@ layout: default
 title: {{ site.name }}
 ---
 
-<h1>
-  <a id="user-content-header-1" class="anchor" href="#header-1" aria-hidden="true">
-    <span class="octicon octicon-link"></span>
-  </a>Introduction
-</h1>
+<p style="text-align: justify;">
+Have you ever watched two movies and thought to yourself, "These movies are so different, but they seem to 
+be covering the same themes and ideas"? Or perhaps you've noticed that two movies from different countries 
+and decades seem to be dealing with similar social issues, sentiments or they could display similar 
+characters. What really makes two movies similar? Do production choices such as the cast or the director play 
+a role in the similarity of two films? And to what extent are two sequels similar to one another? 
+<br>
+<br>
+These are just a few questions that we will be exploring in this project, as we dive into the hidden 
+similarities between films from all times and horizons. In order to answer this problem, we will analyze the 
+dataset of the movies from the CMU Movie Summary Corpus. We will study several similarity features in this 
+dataset of 41783 movies. One feature we will investigate in detail is the topics covered in movie plots. 
+Using this similarity metric, we will construct a graph connecting the movies. With this graph, we aim to 
+identify clusters of movies and evaluate the relationships and influence between them
+<br>
+<br>
+When we think about similarity between two movies the first thing that occurs to your mind is the content 
+of the film, in other words what topics or what fictional world the plot depicts. By looking beyond 
+surface-level differences and delving into the deeper meanings and messages of these films, we can gain 
+a greater appreciation for the universal themes and experiences that they depict.
+</p>
+
+<p style="text-align: center;">
+  <img src="gephi_tuned.png" width="500" height="500">
+</p>
 
 <p style="text-align: justify;">
-  The idea of our project is to represent the dataset of the movies from the CMU Movie Summary Corpus 
-  as a graph by connecting the movies looking at the similarities between them. We are operating with a dateset 
-  of 41783 movies. Based on this graph, 
-  we want to identify clusters and study the most interesting topics.
+In our initial investigation, we used word clouds to present the findings of the BERTOPIC model's analysis 
+of the topic distribution of a collection of film plot summaries organized by decade. The results 
+indicated that films encompass a wide range of topics, while also being impacted by the events and 
+cultural context of their time period.
 </p>
 
-<h1>
-  Method
-</h1>
-
-
-<h1>
-  Visualization
-</h1>
-
-<p>
-In our initial investigation, we used word clouds to present the findings of the 
-BERTOPIC model's analysis of the topic distribution of a collection of film plot 
-summaries organized by decade. The results indicated that films encompass a wide 
-range of topics, while also being impacted 
-by the events and cultural context of their time period.
-For instance, the word clouds for the 1930s decade included words related to France, which aligns with the 
-golden age of French cinema. Similarly, the 1940s and 1950s decades were marked by the aftermath of World 
-War II and the Cold War. While all largely represent the family topic, testifying to the links between the 
-characters described in the plots of films. Overall, this study demonstrates the value of the BERTOPIC model 
-for our analysis of film similarity. The results of the BERTOPIC analysis provide valuable insight into the 
-themes and cultural influences of films, which will be useful in our subsequent analysis of film similarity. 
-By analyzing the topic distribution of a collection of film plot summaries, we can observe how films address 
-a wide range of topics while still being shaped by the events of their respective time period.
-</p>
-¨
-<p style="text-align:center">
-  <iframe src="topics_viz.html" height="800" width="1000" frameBorder="0"></iframe>
-</p>
-<p>
-The figure plotted above is a visualization of the results obtained from applying the BERTOPIC model to a 
-corpus of film plot summaries. Despite some overlap between the topics, the figure provides valuable and 
-accurate information about the relationships between the plots and their corresponding topics. The presence 
-of a large number of small topics allows for a detailed analysis of a wide range of films, while merging 
-them together would result in the loss of important information about individual, original films. Therefore, 
-we decided not to limit the number of topics found by the hbdscan within the BERTOPIC model. Thanks to the 
-slider and the interactive nature of the graph, you can explore the different topics represented by the 
-three terms with the highest C-TF-IDF scores within the documents belonging to each topic.
-</p>
-<p>
-To further illustrate the results, we will examine specific topics by identifying the films that are most 
-representative of them.
-</p>
-
-<p style="text-align:center">
-  <img src="topicAlien.png" alt="alien topic">
-</p>
-
-<p>
-It is worth noting the precision of the BERTOPIC model in differentiating science fiction films based on 
-their plot, as seen above. If a film belongs to two topics at the same time (dinosaurs and aliens for example), 
-it will have a high probability of belonging to these topics, and this feature will be taken into account 
-in the similarity calculation using the cosine function. This approach allows the BERTOPIC model to provide 
-a detailed and accurate analysis of science fiction films, enabling a deeper understanding of their 
-narrative context and more meaningful comparison.
-</p>
-
-<p style="text-align:center">
-  <iframe src="weights_fig.html" height="500" width="600" frameBorder="0"></iframe>
-</p>
-
-<p>
-We have defined the following weights in order to calculate the similarity between films:
-'time': 0.1 -This weight represents the importance of the time factor in determining the similarity 
-between films. For example, a film produced in the 50s has more chances to share similarities with closely 
-time-related films than films from the 2000s. Among the other weights, this factor has the least importance.
-'content': 0.6 - This weight represents the importance of the film's content (e.g. genre, plot, 
-characters, headlines) in determining the similarity between films. We chose to weaken the characters' 
-similarity weight, knowing that multiple films share common character names (e.g. Jhon is used .... times!). 
-Increasing the weight on the genre is a good idea because the genre, if well described, is a very good 
-indicator of a film's content. Among the other weights, this factor has the most importance as it describes 
-a film the best.
-</p>
-<p>
-'production': 0.15 - This weight represents the importance of the film's production (e.g. director, actors, 
-runtime) in determining the similarity between films. It is not uncommon for actors to frequently appear 
-in films of a similar genre. In fact, the presence of a shared actor in two films could serve as an 
-indicator of potential similarities in content between the two.
-</p>
-<p>
-'geography': 0.15 - This weight represents the importance of the film's geography (e.g. language, country) 
-in determining the similarity between films. Films from the same country tend to be more similar, especially 
-if the film's content reflects the country's cultural or societal circumstances or current trends.
-</p>
-<p>
-We chose these weights based on the importance we want to give to each factor in determining the similarity 
-between films. In particular, we iterated over a list of sequels in order to maximize the score for these 
-films. The higher the weight, the more important the factor is in determining the similarity. For more 
-information on sequels, see Chapter [X].
-</p>
-
-
-{% for post in site.posts %}
-  <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-{% endfor %}
-
-<p style="text-align:center">
-  <img src="gephi.jpg" alt="Gephi image">
-</p>
-
-<h2>
-  Size
-</h2>
-
-<h2>
-  Clustering
-</h2>
-
-<h2>
-  Results
-</h2>
-
-<h1>
-  Discussion
-</h1>
-
-<h1>
-  Conclusion
-</h1>
-
-<a href="https://github.com/epfl-ada/ada-2022-project-talecayu">Github</a>
-
-
-<img class="mySlides" src="wordclouds/1910s.png">  
-<img class="mySlides" src="wordclouds/1900s.png">  
+<img class="mySlides" src="wordclouds/1900s.png"> 
+<img class="mySlides" src="wordclouds/1910s.png">   
 <img class="mySlides" src="wordclouds/1920s.png">  
 <img class="mySlides" src="wordclouds/1930s.png">  
 <img class="mySlides" src="wordclouds/1940s.png">
@@ -152,30 +50,131 @@ information on sequels, see Chapter [X].
 <img class="mySlides" src="wordclouds/2010.png">
 
 <p style="text-align:center">
-  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+  <button onclick="plusDivs(-1, 'mySlides')">&#10094;</button>
+  <button onclick="plusDivs(1, 'mySlides')">&#10095;</button>
+</p>
+
+<p style="text-align: justify;">
+For instance, the word clouds for the 1930s decade included words related to France, which aligns with the 
+golden age of French cinema. Similarly, the 1940s and 1950s decades were marked by the aftermath of World 
+War II and the Cold War. While all largely represent the family topic, testifying to the links between the 
+characters described in the plots of films. Overall, this study demonstrates the value of the BERTOPIC model 
+for our analysis of film similarity. The results of the BERTOPIC analysis provide valuable insight into the 
+themes and cultural influences of films, which will be useful in our subsequent analysis of film similarity. 
+By analyzing the topic distribution of a collection of film plot summaries, we can observe how films address 
+a wide range of topics while still being shaped by the events of their respective time period.
+</p>
+
+<p style="text-align:center">
+  <iframe src="topics_viz.html" width="100%" height="700" frameBorder="0"></iframe>
+</p>
+
+<p style="text-align: justify;">
+The figure plotted above is a visualization of the results obtained from applying the BERTOPIC model to a 
+corpus of film plot summaries. Despite some overlap between the topics, the figure provides valuable and 
+accurate information about the relationships between the plots and their corresponding topics. The presence 
+of a large number of small topics allows for a detailed analysis of a wide range of films, while merging 
+them together would result in the loss of important information about individual, original films. Therefore, 
+we decided not to limit the number of topics found by the hbdscan within the BERTOPIC model. Thanks to the 
+slider and the interactive nature of the graph, you can explore the different topics represented by the 
+three terms with the highest C-TF-IDF scores within the documents belonging to each topic.
+</p>
+
+<p style="text-align: justify;">
+To further illustrate the results, we will examine specific topics by identifying the films that are most 
+representative of them.
+</p>
+
+<img class="mySlides2" src="analyseTopics/topicAlien.png">
+<img class="mySlides2" src="analyseTopics/topicCata.png">
+<img class="mySlides2" src="analyseTopics/topicDinau.png">
+<img class="mySlides2" src="analyseTopics/topicVirus.png">
+
+<p style="text-align:center">
+  <button onclick="plusDivs(-1, 'mySlides2')">&#10094;</button>
+  <button onclick="plusDivs(1, 'mySlides2')">&#10095;</button>
+</p>
+
+<p style="text-align: justify;">
+It is worth noting the precision of the BERTOPIC model in differentiating science fiction films based on 
+their plot, as seen above. If a film belongs to two topics at the same time (dinosaurs and aliens for example), 
+it will have a high probability of belonging to these topics, and this feature will be taken into account 
+in the similarity calculation using the cosine function. This approach allows the BERTOPIC model to provide 
+a detailed and accurate analysis of science fiction films, enabling a deeper understanding of their 
+narrative context and more meaningful comparison.
+</p>
+
+<p style="text-align:center">
+  <iframe src="weights_fig.html" height="500" width="600" frameBorder="0"></iframe>
+</p>
+
+<p style="text-align: justify;">
+We have defined the following weights in order to calculate the similarity between films:
+'time': 0.1 -This weight represents the importance of the time factor in determining the similarity 
+between films. For example, a film produced in the 50s has more chances to share similarities with closely 
+time-related films than films from the 2000s. Among the other weights, this factor has the least importance.
+<ul>
+  <li>'content': 0.6 - This weight represents the importance of the film's content (e.g. genre, plot, 
+    characters, headlines) in determining the similarity between films. We chose to weaken the characters' 
+    similarity weight, knowing that multiple films share common character names (e.g. Jhon is used .... times!). 
+    Increasing the weight on the genre is a good idea because the genre, if well described, is a very good 
+    indicator of a film's content. Among the other weights, this factor has the most importance as it describes 
+    a film the best.</li>
+  <li>'production': 0.15 - This weight represents the importance of the film's production (e.g. director, actors, 
+    runtime) in determining the similarity between films. It is not uncommon for actors to frequently appear 
+    in films of a similar genre. In fact, the presence of a shared actor in two films could serve as an 
+    indicator of potential similarities in content between the two.</li>
+  <li>'geography': 0.15 - This weight represents the importance of the film's geography (e.g. language, country) 
+    in determining the similarity between films. Films from the same country tend to be more similar, especially 
+    if the film's content reflects the country's cultural or societal circumstances or current trends.</li>
+</ul> 
+We chose these weights based on the importance we want to give to each factor in determining the similarity 
+between films. In particular, we iterated over a list of sequels in order to maximize the score for these 
+films. The higher the weight, the more important the factor is in determining the similarity. For more 
+information on sequels, see Chapter [X].
 </p>
 
 
-<script>
-var slideIndex = 1;
-showDivs(slideIndex);
+{% for post in site.posts %}
+  <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+{% endfor %}
 
-function plusDivs(n) {
-  showDivs(slideIndex += n);
+<a href="https://github.com/epfl-ada/ada-2022-project-talecayu">Github</a>
+
+<script>
+var slideIndex1 = 1;
+showDivs(slideIndex1);
+var slideIndex2 = 1;
+showDivs(slideIndex2, "mySlides2");
+
+function plusDivs(n, imgClass="mySlides") {
+  if (imgClass=="mySlides") {
+    showDivs(slideIndex1 += n, imgClass);
+  } else if (imgClass=="mySlides2") {
+    showDivs(slideIndex2 += n, imgClass);
+  }
 }
 
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
+function showDivs(n, imgClass="mySlides") {
 
-  x[slideIndex-1].style.display = "block"; 
-  x[slideIndex-1].style.margin = "0 auto";
-  
+  var i;
+  var x = document.getElementsByClassName(imgClass);
+  if (imgClass=="mySlides") {
+    if (n > x.length) {slideIndex1 = 1}
+    if (n < 1) {slideIndex1 = x.length}  
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    x[slideIndex1-1].style.display = "block"; 
+    x[slideIndex1-1].style.margin = "0 auto";
+  } else if (imgClass=="mySlides2") {
+    if (n > x.length) {slideIndex2 = 1}
+    if (n < 1) {slideIndex2 = x.length}
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    x[slideIndex2-1].style.display = "block"; 
+    x[slideIndex2-1].style.margin = "0 auto";
+  }
 }
 </script>
