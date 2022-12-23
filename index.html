@@ -50,8 +50,13 @@ cultural context of their time period.
 <img class="mySlides" src="wordclouds/2010.png">
 
 <p style="text-align:center">
-  <button onclick="plusDivs(-1, 'mySlides')">&#10094;</button>
-  <button onclick="plusDivs(1, 'mySlides')">&#10095;</button>
+  <button onclick="plusDivs(-1, 'mySlides')">
+    <span style='font-size:30px;'>&#10094;</span>
+  </button>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+  <button onclick="plusDivs(-1, 'mySlides')">
+    <span style='font-size:30px;'>&#10094;</span>
+  </button>
 </p>
 
 <p style="text-align: justify;">
@@ -91,8 +96,13 @@ representative of them.
 <img class="mySlides2" src="analyseTopics/topicVirus.png">
 
 <p style="text-align:center">
-  <button onclick="plusDivs(-1, 'mySlides2')">&#10094;</button>
-  <button onclick="plusDivs(1, 'mySlides2')">&#10095;</button>
+  <button onclick="plusDivs(-1, 'mySlides2')">
+    <span style='font-size:30px;'>&#10094;</span>
+  </button>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+  <button onclick="plusDivs(1, 'mySlides2')">
+    <span style='font-size:30px;'>&#10095;</span>
+  </button>
 </p>
 
 <p style="text-align: justify;">
@@ -109,22 +119,24 @@ narrative context and more meaningful comparison.
 </p>
 
 <p style="text-align: justify;">
-We have defined the following weights in order to calculate the similarity between films:
-'time': 0.1 -This weight represents the importance of the time factor in determining the similarity 
-between films. For example, a film produced in the 50s has more chances to share similarities with closely 
-time-related films than films from the 2000s. Among the other weights, this factor has the least importance.
+We have defined the following weights associated to each similarity category in order to calculate the total 
+similarity between films:
 <ul>
-  <li>'content': 0.6 - This weight represents the importance of the film's content (e.g. genre, plot, 
+  <li> 'time' &#128338; 0.1 -This weight represents the importance of the time factor in determining the 
+    similarity between films. For example, a film produced in the 50s has more chances to share similarities 
+    with closely time-related films than films from the 2000s. Among the other weights, this factor has the 
+    least importance. </li>
+  <li> 'content' &#128250; 0.6 - This weight represents the importance of the film's content (e.g. genre, plot, 
     characters, headlines) in determining the similarity between films. We chose to weaken the characters' 
     similarity weight, knowing that multiple films share common character names (e.g. Jhon is used .... times!). 
     Increasing the weight on the genre is a good idea because the genre, if well described, is a very good 
     indicator of a film's content. Among the other weights, this factor has the most importance as it describes 
     a film the best.</li>
-  <li>'production': 0.15 - This weight represents the importance of the film's production (e.g. director, actors, 
+  <li> 'production' &#128253; 0.15 - This weight represents the importance of the film's production (e.g. director, actors, 
     runtime) in determining the similarity between films. It is not uncommon for actors to frequently appear 
     in films of a similar genre. In fact, the presence of a shared actor in two films could serve as an 
     indicator of potential similarities in content between the two.</li>
-  <li>'geography': 0.15 - This weight represents the importance of the film's geography (e.g. language, country) 
+  <li> 'geography' &#127757; 0.15 - This weight represents the importance of the film's geography (e.g. language, country) 
     in determining the similarity between films. Films from the same country tend to be more similar, especially 
     if the film's content reflects the country's cultural or societal circumstances or current trends.</li>
 </ul> 
@@ -132,6 +144,32 @@ We chose these weights based on the importance we want to give to each factor in
 between films. In particular, we iterated over a list of sequels in order to maximize the score for these 
 films. The higher the weight, the more important the factor is in determining the similarity. For more 
 information on sequels, see Chapter [X].
+</p>
+
+<p>
+Now that we have established the weight associated with each similarity feature, we need to compute the 
+similarity between 0 and 1 for each feature. The methods used are detailed here above. For more details 
+about these calculations we invite you to check our code available in open source on GitHub: 
+https://github.com/epfl-ada/ada-2022-project-talecayu
+<br>
+<br>
+We finally get the total similarity between 0 and 1 between every pair of movies 
+</p>
+
+
+<p>
+Here we are, we have obtained our similarity relation between every movie of our dataset. 
+Now let’s construct our movie graph!
+</p>
+
+<p>
+Here is our movie graph constructed with movies as nodes and with similarities as weight on the edges. 
+We created a tool able to assess the relations between movies!
+</p>
+
+<p style="text-align:center">
+  <iframe src="communities/communities_count_barplot.html" height="420" width="600" frameBorder="0"></iframe>
+  <iframe src="communities/communities_count_pie.html" height="400" width="600" frameBorder="0"></iframe>
 </p>
 
 
