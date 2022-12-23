@@ -1,6 +1,6 @@
 # Setup
 title:        Movies as a graph
-tagline:      Project ADA 2022
+tagline:      The hidden similarities between films from all times and horizons.
 baseurl:      "https://leondelachaux.github.io/ada_website_cayman"
 paginate:     1
 locale:       "en"
