@@ -151,9 +151,9 @@ similarity between films:
 </ul> 
 <p style="text-align: justify">
 We chose these weights based on the importance we want to give to each factor in determining the similarity 
-between films. In particular, we iterated over a list of sequels in order to maximize the score for these 
-films. The higher the weight, the more important the factor is in determining the similarity. For more 
-information on sequels, see Chapter [X].
+between films. The higher the weight, the more important the factor is in determining the similarity. In particular, we iterated over a list of sequels in order to maximize the score for these 
+films, we performed tests using a set of sequels and we found good results that would connect the movies from 
+the same sequel.
 </p>
 
 <p style="text-align: center;">
@@ -170,16 +170,6 @@ about these calculations we invite you to check our code available in open sourc
 <p style="text-align: justify">
 We finally get the total similarity between 0 and 1 between every pair of movies and we have obtained our 
 similarity relation between every movie of our dataset. Now let’s construct our movie graph!
-</p>
-
-<h2>
-  Similarity sanity check using sequels
-</h2>
-
-<p style="text-align: justify">
-  To check that the similarity function returns a high value for movies that are close to each other, we 
-  performed tests using a set of sequels and we found good results that would connect the movies from the same
-  sequel.
 </p>
 
 <h1>The Movie graph</h1>
@@ -208,9 +198,6 @@ labeled from community 0 until community 14. We notice that we can focus our ana
 communities as they include most of the movies of the dataset. These 9 communities correspond to the color 
 code used in the graph. Let’s analyze the movies present in each community to get a sense of what they 
 represent, and what links the movies belonging to them.
-<br>
-<br>
-<br>
 <br>
 <br>
 </p>
@@ -353,12 +340,6 @@ Considering multiple similarity features, such as plot, characters, and producti
 in order to get a more comprehensive understanding of the similarities between films. By constructing a 
 graph based on these similarity features, we were able to identify clusters of movies and evaluate the 
 relationships and influence between them.
-<br>
-<br>
-In addition, we conducted an analysis of sequels in order to confirm the effectiveness of our method, 
-fine tune our weighted similarity function and identify situations where our similarity measurement might 
-be distorted. For example, we found that repeating character names across films could potentially mislead 
-our analysis of similarity.
 <br>
 <br>
 The BERTOPIC model and other tools used in this study have great potential for further exploration. 
